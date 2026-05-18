@@ -123,7 +123,7 @@ Este plano descreve os passos para implementar o serviço back-end da aplicaçã
         *   **Payload:** Dados da nova entrega.
         *   **Lógica:** Gerar um ID único (ex: usando o pacote `uuid` ou um contador incremental). Definir `createdAt` para o timestamp atual. Adicionar a nova entrega ao armazenamento.
     *   **Endpoint:** `PUT /api/deliveries/:id`
-        *   **Payload:** Objeto completo da entrega para atualização.
+        *   **Payload:** Objeto completo de atualização.
         *   **Lógica:** Encontrar a entrega pelo ID. Atualizar suas propriedades com o payload fornecido.
     *   **Endpoint:** `DELETE /api/deliveries/:id`
         *   **Lógica:** Remover a entrega do armazenamento pelo ID.

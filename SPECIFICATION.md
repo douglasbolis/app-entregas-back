@@ -4,14 +4,6 @@ Esta documentação especifica os requisitos para a criação de um serviço bac
 
 ---
 
-## Diretrizes Gerais do Projeto
-
-* Ambiente e Stack: Node.js, Express, TypeScript.
-* Persistência de Dados: Restrição Absoluta de Banco de Dados ou ORM. Todo o estado e dados da aplicação devem residir exclusivamente em memória (Memory Store/State síncrono), utilizando arrays ou estruturas de objetos nativos do JavaScript/TypeScript.
-* Isolamento: O projeto deve ser criado de forma totalmente autônoma e independente (fora de estruturas de monorepo anteriores), contendo seu próprio package.json, tsconfig.json e árvore de dependências local.
-
----
-
 ## 1. Scripts e Configurações de Ambiente
 
 O arquivo package.json na raiz do projeto deve expor, no mínimo, os seguintes comandos operacionais:
@@ -138,3 +130,11 @@ A implementação deve seguir um padrão claro de separação de responsabilidad
 * src/server.ts -> Arquivo central de inicialização e configuração do Express
 * package.json -> Manifesto de dependências e scripts locais
 * tsconfig.json -> Configuração do compilador TypeScript
+
+---
+
+## 6. API Security and Authentication
+
+Todos os endpoints da API exigem autenticação via Bearer Token. O cliente deve enviar o cabeçalho `Authorization: Bearer <token>` em cada requisição. O backend validará este token contra uma chave secreta codificada, carregada da variável de ambiente `BEARER_TOKEN`. Caso o token esteja ausente ou seja inválido, o servidor deve responder com um status `401 Unauthorized`.
+
+O endpoint `POST /api/auth/login` também estará protegido por este mecanismo de Bearer Token.

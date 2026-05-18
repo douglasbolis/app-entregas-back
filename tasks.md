@@ -68,3 +68,13 @@ This document outlines the tasks required to build the delivery app backend, bas
 ## Phase 7: Polish & Finalization
 
 *   [X] T016 Create `README.md` with project overview.
+
+---
+
+## Phase 8: Security Enhancement - Bearer Token Authentication
+
+*   [ ] T017 [SE1] Install dotenv: `npm install dotenv`
+*   [ ] T018 [SE1] Create `src/middleware/authMiddleware.ts` with Bearer Token validation logic.
+*   [ ] T019 [SE1] Configure dotenv in `src/server.ts` to load `BEARER_TOKEN`.
+*   [ ] T020 [SE1] Apply `authMiddleware` globally in `src/server.ts` before defining API routes.
+*   [ ] T021 [SE1] Update `POST /api/auth/login` to also be protected by the Bearer Token middleware.
