@@ -16,23 +16,11 @@ interface MemoryStoreState {
 
 const initialUsers: User[] = [
   {
-    id: 'driver-douglas',
-    name: 'Douglas Lima',
-    email: 'douglas@entrega.com',
+    id: 'driver-entregador',
+    name: 'Entregador Lima',
+    email: 'entrega@mail.com',
     password: '123',
-  },
-  {
-    id: 'driver-gustavo',
-    name: 'Gustavo Silva',
-    email: 'gustavo@entrega.com',
-    password: '123',
-  },
-  {
-    id: 'driver-gabriel',
-    name: 'Gabriel Santos',
-    email: 'gabriel@entrega.com',
-    password: '123',
-  },
+  }
 ];
 
 // Helper to create mock deliveries
@@ -42,17 +30,18 @@ const createMockDeliveries = (driverId: string, count: number): Delivery[] => {
 
   for (let i = 0; i < count; i++) {
     const status = i < count - 1 ? statuses[Math.floor(Math.random() * (statuses.length - 1))] : DeliveryStatus.COMPLETED; // Ensure one is COMPLETED
-    const pickupLat = -23.5505 + Math.random() * 0.1;
-    const pickupLng = -46.6333 + Math.random() * 0.1;
-    const deliveryLat = -23.5505 + Math.random() * 0.1;
-    const deliveryLng = -46.6333 + Math.random() * 0.1;
+    const pickupLat = -20.1896 + Math.random() * 0.1;
+    const pickupLng = -40.1913 + Math.random() * 0.1;
+    const deliveryLat = -20.1979 + Math.random() * 0.1;
+    const deliveryLng = -40.2177 + Math.random() * 0.1;
+    const clientNumber = Math.round(Math.random() * 100);
 
     deliveries.push({
       id: uuidv4(),
       driverId: driverId,
-      clientName: `Cliente ${i + 1}`,
-      pickupAddress: `Endereço de Coleta ${i + 1}`,
-      deliveryAddress: `Endereço de Entrega ${i + 1}`,
+      clientName: `Cliente ${clientNumber}`,
+      pickupAddress: `Endereço ${clientNumber} de Coleta`,
+      deliveryAddress: `Rua ${clientNumber} Bairro Laranjeiras, Serra - ES`,
       status: status as DeliveryStatus,
       price: 50.0 + Math.random() * 50.0,
       coordinates: {
@@ -67,9 +56,7 @@ const createMockDeliveries = (driverId: string, count: number): Delivery[] => {
 };
 
 const initialDeliveries: Delivery[] = [
-  ...createMockDeliveries('driver-douglas', 6), // 5 PENDING, 1 COMPLETED
-  ...createMockDeliveries('driver-gabriel', 6), // 5 PENDING, 1 COMPLETED
-  ...createMockDeliveries('driver-gustavo', 6), // 5 PENDING, 1 COMPLETED
+  ...createMockDeliveries('driver-entregador', 6), // 3 PENDING, 1 COMPLETED
 ];
 
 // Ensure the fixed COMPLETED delivery has its completedAt timestamp if it was randomly assigned
@@ -103,6 +90,10 @@ const getDeliveries = (driverId?: string): Delivery[] => {
 
 const findDeliveryById = (id: string): Delivery | undefined => {
   return store.deliveries.find(delivery => delivery.id === id);
+};
+
+const getFirstDelivery = (): Delivery | undefined => {
+  return store.deliveries[0];
 };
 
 const addDelivery = (deliveryData: Omit<Delivery, 'id' | 'createdAt' | 'status' | 'completedAt'>): Delivery => {
@@ -164,6 +155,7 @@ export {
   findUserByEmail,
   getDeliveries,
   findDeliveryById,
+  getFirstDelivery,
   addDelivery,
   updateDeliveryStatus,
   updateDelivery,
