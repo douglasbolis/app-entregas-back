@@ -1,0 +1,6 @@
+node_modules/
+dist/
+
+# Arquivos de Configuração Específicos
+.gemini/
+.specify/
