@@ -34,14 +34,14 @@ const createMockDeliveries = (driverId: string, count: number): Delivery[] => {
     const pickupLng = -40.1913 + Math.random() * 0.1;
     const deliveryLat = -20.1979 + Math.random() * 0.1;
     const deliveryLng = -40.2177 + Math.random() * 0.1;
-    const clientNumber = Math.round(Math.random() * 100);
+    const clientNumber = Math.round(Math.random() * 1000);
 
     deliveries.push({
       id: uuidv4(),
       driverId: driverId,
       clientName: `Cliente ${clientNumber}`,
       pickupAddress: `Endereço ${clientNumber} de Coleta`,
-      deliveryAddress: `Rua ${clientNumber} Bairro Laranjeiras, Serra - ES`,
+      deliveryAddress: `Av. dos Sabiás, ${clientNumber} - Morada de Laranjeiras, Serra - ES`,
       status: status as DeliveryStatus,
       price: 50.0 + Math.random() * 50.0,
       coordinates: {
